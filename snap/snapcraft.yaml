@@ -1,0 +1,73 @@
+name: librepcb
+base: core18 
+version: '0.1.2'
+summary: LibrePCB
+description: |
+  A free EDA software to develop printed circuit boards.
+
+grade: stable 
+confinement: strict 
+
+apps:
+  librepcb:
+    command: desktop-launch $SNAP/usr/local/bin/librepcb
+    plugs:
+      - x11
+      - opengl
+      - desktop
+      - desktop-legacy
+      - network
+      - home
+      - removable-media
+
+parts:
+  librepcb:
+    after: [desktop-qt5]
+    plugin: qmake
+    qt-version: qt5
+    source: https://github.com/LibrePCB/LibrePCB.git
+    source-tag: $SNAPCRAFT_PROJECT_VERSION
+    project-files: ["librepcb.pro"]
+    options: ["-r"]
+    build-packages:
+      - qt5-default
+      - qttools5-dev-tools
+      - build-essential
+      - libglu1-mesa-dev
+      - openssl
+      - zlib1g
+      - zlib1g-dev
+      - libqt5opengl5-dev
+      - libsfml-dev
+    stage-packages:
+      - libglu1-mesa
+      - libqt5opengl5
+      - libqt5printsupport5
+      - libqt5sql5
+      - libqt5sql5-sqlite
+  desktop-qt5:
+    build-packages:
+    - build-essential
+    - qtbase5-dev
+    - dpkg-dev
+    make-parameters:
+    - FLAVOR=qt5
+    plugin: make
+    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
+    source-subdir: qt
+    stage-packages:
+    - libxkbcommon0
+    - ttf-ubuntu-font-family
+    - dmz-cursor-theme
+    - light-themes
+    - adwaita-icon-theme
+    - gnome-themes-standard
+    - shared-mime-info
+    - libqt5gui5
+    - libgdk-pixbuf2.0-0
+    - libqt5svg5
+    - try:
+      - appmenu-qt5
+    - locales-all
+    - xdg-user-dirs
+    - fcitx-frontend-qt5
