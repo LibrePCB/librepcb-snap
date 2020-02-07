@@ -28,7 +28,7 @@ parts:
     source: https://github.com/LibrePCB/LibrePCB.git
     override-build: |
       snapcraftctl build
-      snapcraftctl set-version $(git -C ../src describe --tags)
+      snapcraftctl set-version $(git -C ../src tag | grep -v "first" | tail -n 1)-$(git -C ../src rev-parse --short HEAD)
     project-files: ["librepcb.pro"]
     options: ["-r"]
     build-packages:
