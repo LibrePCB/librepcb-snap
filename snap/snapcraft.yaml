@@ -11,6 +11,8 @@ confinement: strict
 apps:
   librepcb:
     command: desktop-launch $SNAP/usr/local/bin/librepcb
+    environment:
+      DISABLE_WAYLAND: 1
     plugs:
       - x11
       - opengl
@@ -19,6 +21,7 @@ apps:
       - network
       - home
       - removable-media
+      - wayland
 
 parts:
   librepcb:
