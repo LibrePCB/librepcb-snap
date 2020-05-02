@@ -55,7 +55,7 @@ parts:
     override-build: |
       git submodule update --init --recursive
       snapcraftctl build
-      snapcraftctl set-version "0.1.4-3"
+      snapcraftctl set-version "0.1.4-4"
     project-files: ["librepcb.pro"]
     options: ["-r"]
     build-packages:
