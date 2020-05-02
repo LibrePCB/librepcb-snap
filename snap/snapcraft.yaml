@@ -1,9 +1,22 @@
 name: librepcb
 base: core18
 adopt-info: librepcb
-summary: LibrePCB
+summary: EDA software to develop printed circuit boards.
 description: |
-  A free EDA software to develop printed circuit boards.
+  LibrePCB is a free EDA software to draw schematics and design printed
+  circuit boards (PCBs).
+
+  Key Features:
+
+    - Cross-platform (Unix/Linux, Mac OS X, Windows)
+    - All-in-one (project management, library/schematic/board editors)
+    - Intuitive, modern and easy-to-use graphical user interface
+    - Very powerful library design with some innovative concepts
+    - Human-readable file formats
+    - Open Source (GNU GPLv3)
+
+  To get started with LibrePCB, please take a look at
+  https://docs.librepcb.org/.
 
 grade: stable
 confinement: strict
@@ -39,7 +52,7 @@ parts:
     source-commit: ae04eef5a71b5ba66ae2cee6b631c1c933ace535
     override-build: |
       snapcraftctl build
-      snapcraftctl set-version "0.1.4-2"
+      snapcraftctl set-version "0.1.4-3"
     project-files: ["librepcb.pro"]
     options: ["-r"]
     build-packages:
