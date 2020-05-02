@@ -39,12 +39,14 @@ parts:
       - openssl
       - zlib1g
       - zlib1g-dev
+      - libqt5svg5-dev
       - libqt5opengl5-dev
       - libsfml-dev
     stage-packages:
       - libglu1-mesa
       - libqt5opengl5
       - libqt5printsupport5
+      - libqt5svg5
       - libqt5sql5
       - libqt5sql5-sqlite
   desktop-qt5:
