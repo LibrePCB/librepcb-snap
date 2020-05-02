@@ -73,6 +73,7 @@ parts:
       - libqt5svg5
       - libqt5sql5
       - libqt5sql5-sqlite
+      - qttranslations5-l10n  # to get translations for Qt built-in strings
   desktop-qt5:
     build-packages:
     - build-essential
