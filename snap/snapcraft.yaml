@@ -19,6 +19,16 @@ apps:
       - network
       - home
       - removable-media
+  librepcb-cli:
+    command: desktop-launch $SNAP/usr/local/bin/librepcb-cli
+    plugs:
+      - x11
+      - opengl
+      - desktop
+      - desktop-legacy
+      - network
+      - home
+      - removable-media
 
 parts:
   librepcb:
