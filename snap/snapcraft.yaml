@@ -1,12 +1,12 @@
 name: librepcb
-base: core18 
+base: core18
 adopt-info: librepcb
 summary: LibrePCB
 description: |
   A free EDA software to develop printed circuit boards.
 
-grade: stable 
-confinement: strict 
+grade: stable
+confinement: strict
 
 apps:
   librepcb:
@@ -26,9 +26,10 @@ parts:
     plugin: qmake
     qt-version: qt5
     source: https://github.com/LibrePCB/LibrePCB.git
+    source-commit: fb39480f45233beb9e695dc51c2161d1d50d1145
     override-build: |
       snapcraftctl build
-      snapcraftctl set-version $(git -C ../src tag | grep -v "first" | tail -n 1)-$(git -C ../src rev-parse --short HEAD)
+      snapcraftctl set-version "0.1.4-1"
     project-files: ["librepcb.pro"]
     options: ["-r"]
     build-packages:
