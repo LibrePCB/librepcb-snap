@@ -52,10 +52,12 @@ parts:
     source-commit: ae04eef5a71b5ba66ae2cee6b631c1c933ace535
     # Note: snapcraft does not check out the correct submodule revisions, so
     # we manually need to run "git submodule update --init --recursive".
-    override-build: |
+    override-pull: |
+      snapcraftctl pull
       git submodule update --init --recursive
+    override-build: |
       snapcraftctl build
-      snapcraftctl set-version "0.1.4-4"
+      snapcraftctl set-version "0.1.4-5"
     project-files: ["librepcb.pro"]
     options: ["-r"]
     build-packages:
