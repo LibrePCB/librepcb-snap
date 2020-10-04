@@ -49,7 +49,7 @@ parts:
     plugin: qmake
     qt-version: qt5
     source: https://github.com/LibrePCB/LibrePCB.git
-    source-commit: ae04eef5a71b5ba66ae2cee6b631c1c933ace535
+    source-commit: a435c5095c6f94df4da130fe832ea97f42d17901
     # Note: snapcraft does not check out the correct submodule revisions, so
     # we manually need to run "git submodule update --init --recursive".
     override-pull: |
@@ -57,7 +57,7 @@ parts:
       git submodule update --init --recursive
     override-build: |
       snapcraftctl build
-      snapcraftctl set-version "0.1.4-5"
+      snapcraftctl set-version "0.1.5-1"
     project-files: ["librepcb.pro"]
     options: ["-r"]
     build-packages:
