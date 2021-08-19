@@ -25,23 +25,23 @@ apps:
   librepcb:
     command: desktop-launch $SNAP/usr/local/bin/librepcb
     plugs:
-      - x11
-      - opengl
       - desktop
       - desktop-legacy
-      - network
       - home
+      - network
+      - opengl
       - removable-media
+      - x11
   librepcb-cli:
     command: desktop-launch $SNAP/usr/local/bin/librepcb-cli
     plugs:
-      - x11
-      - opengl
       - desktop
       - desktop-legacy
-      - network
       - home
+      - network
+      - opengl
       - removable-media
+      - x11
 
 parts:
   librepcb:
