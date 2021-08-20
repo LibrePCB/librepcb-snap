@@ -25,10 +25,7 @@ apps:
   librepcb:
     command: desktop-launch $SNAP/usr/local/bin/librepcb
     environment:
-      # Do not use Wayland for now since it looks ugly. Copied from MuseScore:
-      # https://github.com/pachulo/musescore-snap/blob/master/snap/snapcraft.yaml
-      DISABLE_WAYLAND: 1
-      QT_QPA_PLATFORMTHEME: gtk3
+      DISABLE_WAYLAND: 1  # Do not use Wayland for now since it looks ugly.
     plugs:
       - desktop
       - desktop-legacy
