@@ -24,6 +24,11 @@ confinement: strict
 apps:
   librepcb:
     command: desktop-launch $SNAP/usr/local/bin/librepcb
+    environment:
+      # Do not use Wayland for now since it looks ugly. Copied from MuseScore:
+      # https://github.com/pachulo/musescore-snap/blob/master/snap/snapcraft.yaml
+      DISABLE_WAYLAND: 1
+      QT_QPA_PLATFORMTHEME: gtk3
     plugs:
       - desktop
       - desktop-legacy
@@ -31,6 +36,7 @@ apps:
       - network
       - opengl
       - removable-media
+      - wayland
       - x11
   librepcb-cli:
     command: desktop-launch $SNAP/usr/local/bin/librepcb-cli
@@ -41,6 +47,7 @@ apps:
       - network
       - opengl
       - removable-media
+      - wayland
       - x11
 
 parts:
@@ -79,6 +86,7 @@ parts:
       - libqt5sql5
       - libqt5sql5-sqlite
       - qttranslations5-l10n  # to get translations for Qt built-in strings
+      - qtwayland5
   desktop-qt5:
     build-packages:
     - build-essential
