@@ -87,6 +87,7 @@ parts:
       - libqt5svg5
       - libqt5sql5
       - libqt5sql5-sqlite
+      - libqt5xml5
       - qttranslations5-l10n  # to get translations for Qt built-in strings
       - qtwayland5
   desktop-qt5:
