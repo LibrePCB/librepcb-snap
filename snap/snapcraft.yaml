@@ -1,6 +1,11 @@
 name: librepcb
+icon: snap/gui/librepcb.svg
 base: core18
-adopt-info: librepcb
+version: 0.1.7-1
+website: https://librepcb.org
+donation: https://librepcb.org/donate/
+source-code: https://github.com/LibrePCB/LibrePCB
+issues: https://github.com/LibrePCB/LibrePCB/issues
 summary: EDA software to develop printed circuit boards.
 description: |
   LibrePCB is a free EDA software to draw schematics and design printed
@@ -63,9 +68,6 @@ parts:
     override-pull: |
       snapcraftctl pull
       git submodule update --init --recursive
-    override-build: |
-      snapcraftctl build
-      snapcraftctl set-version "0.1.7-1"
     build-packages:
       - qt5-default
       - qttools5-dev

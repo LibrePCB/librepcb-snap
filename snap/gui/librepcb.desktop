@@ -6,6 +6,6 @@ GenericName=PCB Designer
 Categories=Development;Engineering;Electronics;
 Type=Application
 Terminal=false
-Icon=${SNAP}/meta/gui/librepcb.png
+Icon=${SNAP}/meta/gui/librepcb
 Exec=librepcb %U
 MimeType=application/x-librepcb-project;
