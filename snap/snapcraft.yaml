@@ -57,18 +57,15 @@ parts:
     plugin: cmake
     configflags: ["-DCMAKE_INSTALL_PREFIX=/usr/local"]
     source: https://github.com/LibrePCB/LibrePCB.git
-    source-commit: c4f31642899f0ed6b535fe3edafbd3315eddd490
+    source-commit: ba553c6fbe53ac2f1eadfc337881285705f2fcc3
     # Note: snapcraft does not check out the correct submodule revisions, so
     # we manually need to run "git submodule update --init --recursive".
-    # In addition, remove lines 65-73 from CMakeLists.txt to allow in-soure
-    # builds. See https://github.com/LibrePCB/LibrePCB/pull/931.
     override-pull: |
       snapcraftctl pull
       git submodule update --init --recursive
-      sed -i '65,73d' CMakeLists.txt
     override-build: |
       snapcraftctl build
-      snapcraftctl set-version "0.1.6-1"
+      snapcraftctl set-version "0.1.7-1"
     build-packages:
       - qt5-default
       - qttools5-dev
