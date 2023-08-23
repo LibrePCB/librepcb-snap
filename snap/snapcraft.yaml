@@ -1,7 +1,9 @@
 name: librepcb
-icon: snap/gui/librepcb.svg
+title: LibrePCB
 base: core18
-version: 0.1.7-1
+icon: snap/gui/librepcb.svg
+version: 1.0.0-rc1-1
+license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
 source-code: https://github.com/LibrePCB/LibrePCB
@@ -21,7 +23,7 @@ description: |
     - Open Source (GNU GPLv3)
 
   To get started with LibrePCB, please take a look at
-  https://docs.librepcb.org/.
+  https://librepcb.org/docs/.
 
 grade: stable
 confinement: strict
@@ -57,37 +59,53 @@ apps:
       - x11
 
 parts:
+  patches:
+    source: patches
+    plugin: dump
+    prime:
+      - -*
   librepcb:
-    after: [desktop-qt5]
+    after: [patches, desktop-qt5]
     plugin: cmake
     configflags: ["-DCMAKE_INSTALL_PREFIX=/usr/local"]
     source: https://github.com/LibrePCB/LibrePCB.git
-    source-commit: ba553c6fbe53ac2f1eadfc337881285705f2fcc3
+    source-tag: 1.0.0-rc1
     # Note: snapcraft does not check out the correct submodule revisions, so
     # we manually need to run "git submodule update --init --recursive".
     override-pull: |
       snapcraftctl pull
       git submodule update --init --recursive
+      git apply $SNAPCRAFT_STAGE/0001-fix-calling-qt5.10-method.patch
+      git apply $SNAPCRAFT_STAGE/0002-fix-calling-qt5.10-method.patch
     build-packages:
-      - qt5-default
-      - qttools5-dev
-      - qttools5-dev-tools
       - build-essential
       - libglu1-mesa-dev
+      - liboce-ocaf-dev
+      - libqt5opengl5-dev
+      - libqt5svg5-dev
+      - libsfml-dev
       - openssl
+      - qt5-default
+      - qtdeclarative5-dev
+      - qtquickcontrols2-5-dev
+      - qttools5-dev
+      - qttools5-dev-tools
       - zlib1g
       - zlib1g-dev
-      - libqt5svg5-dev
-      - libqt5opengl5-dev
-      - libsfml-dev
     stage-packages:
       - libglu1-mesa
+      - liboce-ocaf11
       - libqt5opengl5
       - libqt5printsupport5
-      - libqt5svg5
+      - libqt5quick5
+      - libqt5quickcontrols2-5
       - libqt5sql5
       - libqt5sql5-sqlite
+      - libqt5svg5
       - libqt5xml5
+      - qml-module-qtquick-controls2
+      - qml-module-qtquick-layouts
+      - qml-module-qtquick2
       - qttranslations5-l10n  # to get translations for Qt built-in strings
       - qtwayland5
   desktop-qt5:
