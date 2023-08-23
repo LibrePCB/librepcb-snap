@@ -1,7 +1,9 @@
 name: librepcb
-icon: snap/gui/librepcb.svg
+title: LibrePCB
 base: core18
+icon: snap/gui/librepcb.svg
 version: 0.1.7-1
+license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
 source-code: https://github.com/LibrePCB/LibrePCB
@@ -21,7 +23,7 @@ description: |
     - Open Source (GNU GPLv3)
 
   To get started with LibrePCB, please take a look at
-  https://docs.librepcb.org/.
+  https://librepcb.org/docs/.
 
 grade: stable
 confinement: strict
@@ -69,24 +71,24 @@ parts:
       snapcraftctl pull
       git submodule update --init --recursive
     build-packages:
+      - build-essential
+      - libglu1-mesa-dev
+      - libqt5opengl5-dev
+      - libqt5svg5-dev
+      - libsfml-dev
+      - openssl
       - qt5-default
       - qttools5-dev
       - qttools5-dev-tools
-      - build-essential
-      - libglu1-mesa-dev
-      - openssl
       - zlib1g
       - zlib1g-dev
-      - libqt5svg5-dev
-      - libqt5opengl5-dev
-      - libsfml-dev
     stage-packages:
       - libglu1-mesa
       - libqt5opengl5
       - libqt5printsupport5
-      - libqt5svg5
       - libqt5sql5
       - libqt5sql5-sqlite
+      - libqt5svg5
       - libqt5xml5
       - qttranslations5-l10n  # to get translations for Qt built-in strings
       - qtwayland5
