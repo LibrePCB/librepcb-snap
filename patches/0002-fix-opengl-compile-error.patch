@@ -1,20 +1,23 @@
 diff --git a/libs/librepcb/editor/widgets/openglview.cpp b/libs/librepcb/editor/widgets/openglview.cpp
-index 17ba5f283..c95df8291 100644
+index 17ba5f283..e00e976cd 100644
 --- a/libs/librepcb/editor/widgets/openglview.cpp
 +++ b/libs/librepcb/editor/widgets/openglview.cpp
-@@ -239,11 +239,15 @@ void OpenGlView::initializeGL() {
+@@ -29,6 +29,18 @@
+ #include <QtOpenGL>
+ #include <QtWidgets>
  
-   // Set OpenGL options.
-   glEnable(GL_DEPTH_TEST);
-+#ifdef GL_MULTISAMPLE  // Fixes https://github.com/LibrePCB/LibrePCB/issues/1205
-   glEnable(GL_MULTISAMPLE);
++// Compatibility defines to fix build error on some targets, see
++// https://github.com/LibrePCB/LibrePCB/issues/1205.
++#ifndef GL_MULTISAMPLE
++#define GL_MULTISAMPLE 0x809D
 +#endif
-   glEnable(GL_BLEND);
-   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-+#ifdef GL_LINE_SMOOTH  // Fixes https://github.com/LibrePCB/LibrePCB/issues/1205
-   glEnable(GL_LINE_SMOOTH);
-   glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
++#ifndef GL_LINE_SMOOTH
++#define GL_LINE_SMOOTH 0x0B20
 +#endif
- }
- 
- void OpenGlView::resizeGL(int w, int h) {
++#ifndef GL_LINE_SMOOTH_HINT
++#define GL_LINE_SMOOTH_HINT 0x0C52
++#endif
++
+ /*******************************************************************************
+  *  Namespace
+  ******************************************************************************/
