@@ -1,0 +1,20 @@
+diff --git a/libs/librepcb/editor/widgets/openglview.cpp b/libs/librepcb/editor/widgets/openglview.cpp
+index 17ba5f283..c95df8291 100644
+--- a/libs/librepcb/editor/widgets/openglview.cpp
++++ b/libs/librepcb/editor/widgets/openglview.cpp
+@@ -239,11 +239,15 @@ void OpenGlView::initializeGL() {
+ 
+   // Set OpenGL options.
+   glEnable(GL_DEPTH_TEST);
++#ifdef GL_MULTISAMPLE  // Fixes https://github.com/LibrePCB/LibrePCB/issues/1205
+   glEnable(GL_MULTISAMPLE);
++#endif
+   glEnable(GL_BLEND);
+   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
++#ifdef GL_LINE_SMOOTH  // Fixes https://github.com/LibrePCB/LibrePCB/issues/1205
+   glEnable(GL_LINE_SMOOTH);
+   glHint(GL_LINE_SMOOTH_HINT, GL_NICEST);
++#endif
+ }
+ 
+ void OpenGlView::resizeGL(int w, int h) {
