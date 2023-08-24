@@ -1,6 +1,6 @@
 name: librepcb
 title: LibrePCB
-base: core20
+base: core22
 icon: snap/gui/librepcb.svg
 version: 1.0.0-rc1-1
 license: GPL-3.0+
@@ -88,7 +88,7 @@ parts:
       - libsfml-dev
       - ninja-build
       - openssl
-      - qt5-default
+      - qtbase5-dev
       - qtdeclarative5-dev
       - qtquickcontrols2-5-dev
       - qttools5-dev
@@ -123,7 +123,7 @@ parts:
     source-subdir: qt
     stage-packages:
       - libxkbcommon0
-      - ttf-ubuntu-font-family
+      - fonts-freefont-ttf
       - dmz-cursor-theme
       - light-themes
       - adwaita-icon-theme
