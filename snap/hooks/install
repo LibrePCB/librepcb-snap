@@ -3,3 +3,4 @@
 echo "$SNAP_REAL_HOME" > $SNAP_DATA/snap_hook_log.txt
 echo `id -u` >> $SNAP_DATA/snap_hook_log.txt
 echo `id -g` >> $SNAP_DATA/snap_hook_log.txt
+echo `which update-mime-database` >> $SNAP_DATA/snap_hook_log.txt
