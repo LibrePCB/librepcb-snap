@@ -63,7 +63,16 @@ apps:
       - wayland
       - x11
 
+hooks:
+  post-refresh:
+    plugs: [home]
+  remove:
+    plugs: [home]
+
 parts:
+  meta:
+    source: meta
+    plugin: dump
   patches:
     source: patches
     plugin: dump

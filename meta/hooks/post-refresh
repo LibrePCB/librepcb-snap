@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "REFRESHED" >> $SNAP_REAL_HOME/snap_log.txt
