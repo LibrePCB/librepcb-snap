@@ -70,9 +70,6 @@ hooks:
     plugs: [home]
 
 parts:
-  meta:
-    source: meta
-    plugin: dump
   patches:
     source: patches
     plugin: dump
