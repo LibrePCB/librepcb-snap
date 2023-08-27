@@ -1,6 +1,8 @@
 #!/bin/sh
 
-echo "$SNAP_REAL_HOME" > $SNAP_DATA/snap_hook_log.txt
-echo `id -u` >> $SNAP_DATA/snap_hook_log.txt
-echo `id -g` >> $SNAP_DATA/snap_hook_log.txt
-echo `which update-mime-database` >> $SNAP_DATA/snap_hook_log.txt
+LOG=$SNAP_COMMON/install_hook_log.txt
+echo `date` > $LOG
+
+cp -vf $SNAP/usr/local/share/mime/packages/org.librepcb.LibrePCB.xml \
+ /usr/local/share/mime/packages/librepcb-snap.xml >> $LOG
+update-mime-database /usr/local/share/mime >> $LOG
