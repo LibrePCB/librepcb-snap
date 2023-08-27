@@ -3,6 +3,7 @@
 LOG=$SNAP_COMMON/install_hook_log.txt
 echo `date` > $LOG
 
+mkdir -vp /usr/share/mime/packages >> $LOG
 cp -vf $SNAP/usr/local/share/mime/packages/org.librepcb.LibrePCB.xml \
- /usr/local/share/mime/packages/librepcb-snap.xml >> $LOG
-update-mime-database /usr/local/share/mime >> $LOG
+ /usr/share/mime/packages/librepcb-snap.xml >> $LOG
+update-mime-database /usr/share/mime >> $LOG

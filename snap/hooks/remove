@@ -3,5 +3,5 @@
 LOG=$SNAP_COMMON/remove_hook_log.txt
 echo `date` > $LOG
 
-rm -vf /usr/local/share/mime/packages/librepcb-snap.xml >> $LOG
-update-mime-database /usr/local/share/mime >> $LOG
+rm -vf /usr/share/mime/packages/librepcb-snap.xml >> $LOG
+update-mime-database /usr/share/mime >> $LOG
