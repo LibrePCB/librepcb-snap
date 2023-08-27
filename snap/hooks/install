@@ -1,3 +1,5 @@
 #!/bin/sh
 
-echo "INSTALLED" > $SNAP_DATA/snap_hook_log.txt
+echo "$SNAP_REAL_HOME" > $SNAP_DATA/snap_hook_log.txt
+echo `id -u` >> $SNAP_DATA/snap_hook_log.txt
+echo `id -g` >> $SNAP_DATA/snap_hook_log.txt
