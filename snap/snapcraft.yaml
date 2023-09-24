@@ -2,7 +2,7 @@ name: librepcb
 title: LibrePCB
 base: core22
 icon: snap/gui/librepcb.svg
-version: 1.0.0-rc1-1
+version: 1.0.0-1
 license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
@@ -64,22 +64,14 @@ apps:
       - x11
 
 parts:
-  patches:
-    source: patches
-    plugin: dump
-    prime: [-*]
   librepcb:
-    after: [patches, desktop-qt5]
+    after: [desktop-qt5]
     plugin: cmake
     cmake-generator: Ninja
     cmake-parameters:
       - "-DCMAKE_INSTALL_PREFIX=/usr/local"
     source: https://github.com/LibrePCB/LibrePCB.git
-    source-tag: 1.0.0-rc1
-    override-build: |
-      git -C $CRAFT_PART_SRC checkout -- .
-      git -C $CRAFT_PART_SRC apply $CRAFT_STAGE/*.patch
-      craftctl default
+    source-tag: 1.0.0
     build-packages:
       - build-essential
       - libglu1-mesa-dev
