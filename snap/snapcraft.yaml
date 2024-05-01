@@ -31,6 +31,7 @@ confinement: strict
 apps:
   librepcb:
     command: bin/desktop-launch $SNAP/usr/local/bin/librepcb
+    desktop: usr/local/share/applications/org.librepcb.LibrePCB.desktop
     environment:
       # Do not use Wayland for now because the 3D viewer contains very ugly
       # rendering artifacts. In addition, Wayland does not support
