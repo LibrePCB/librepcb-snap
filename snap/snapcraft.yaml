@@ -75,11 +75,18 @@ parts:
     build-packages:
       - build-essential
       - libglu1-mesa-dev
+      - libocct-data-exchange-dev
+      - libocct-draw-dev
+      - libocct-foundation-dev
+      - libocct-modeling-algorithms-dev
+      - libocct-modeling-data-dev
       - libocct-ocaf-dev
+      - libocct-visualization-dev
       - libqt5opengl5-dev
       - libqt5svg5-dev
       - libsfml-dev
       - ninja-build
+      - occt-misc
       - openssl
       - qtbase5-dev
       - qtdeclarative5-dev
@@ -90,7 +97,13 @@ parts:
       - zlib1g-dev
     stage-packages:
       - libglu1-mesa
+      - libocct-data-exchange-7.5
+      - libocct-draw-7.5
+      - libocct-foundation-7.5
+      - libocct-modeling-algorithms-7.5
+      - libocct-modeling-data-7.5
       - libocct-ocaf-7.5
+      - libocct-visualization-7.5
       - libqt5opengl5
       - libqt5printsupport5
       - libqt5quick5
@@ -99,6 +112,7 @@ parts:
       - libqt5sql5-sqlite
       - libqt5svg5
       - libqt5xml5
+      - occt-misc
       - qml-module-qtquick-controls2
       - qml-module-qtquick-layouts
       - qml-module-qtquick2
