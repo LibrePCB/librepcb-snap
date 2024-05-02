@@ -70,6 +70,11 @@ parts:
     cmake-generator: Ninja
     cmake-parameters:
       - "-DCMAKE_INSTALL_PREFIX=/usr/local"
+    build-environment:
+      # Snapcraft prefixes PATH with something that makes cmake to fail
+      # finding OpenCascade. We revert this by moving more important paths
+      # to the front of PATH.
+      - PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
     source: https://github.com/LibrePCB/LibrePCB.git
     source-tag: 1.1.0
     build-packages:
@@ -85,6 +90,8 @@ parts:
       - libqt5opengl5-dev
       - libqt5svg5-dev
       - libsfml-dev
+      - libtbb-dev  # Required by OCCT
+      - libxi-dev  # Required by OCCT
       - ninja-build
       - occt-misc
       - openssl
