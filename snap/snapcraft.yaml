@@ -65,7 +65,7 @@ apps:
 
 parts:
   librepcb:
-    after: [desktop-qt5]
+    after: [opencascade, desktop-qt5]
     plugin: cmake
     cmake-generator: Ninja
     cmake-parameters:
@@ -75,25 +75,19 @@ parts:
       # finding OpenCascade. We revert this by moving more important paths
       # to the front of PATH.
       - PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
+    # One more workaround to fix a CMake/OpenCascade error...
+    override-build: |
+      ln -s "/root/stage/usr/lib" "/root/stage/usr/lib\${OCCT_INSTALL_BIN_LETTER}"
+      snapcraftctl build
     source: https://github.com/LibrePCB/LibrePCB.git
     source-tag: 1.1.0
     build-packages:
       - build-essential
       - libglu1-mesa-dev
-      - libocct-data-exchange-dev
-      - libocct-draw-dev
-      - libocct-foundation-dev
-      - libocct-modeling-algorithms-dev
-      - libocct-modeling-data-dev
-      - libocct-ocaf-dev
-      - libocct-visualization-dev
       - libqt5opengl5-dev
       - libqt5svg5-dev
       - libsfml-dev
-      - libtbb-dev  # Required by OCCT
-      - libxi-dev  # Required by OCCT
       - ninja-build
-      - occt-misc
       - openssl
       - qtbase5-dev
       - qtdeclarative5-dev
@@ -104,13 +98,6 @@ parts:
       - zlib1g-dev
     stage-packages:
       - libglu1-mesa
-      - libocct-data-exchange-7.5
-      - libocct-draw-7.5
-      - libocct-foundation-7.5
-      - libocct-modeling-algorithms-7.5
-      - libocct-modeling-data-7.5
-      - libocct-ocaf-7.5
-      - libocct-visualization-7.5
       - libqt5opengl5
       - libqt5printsupport5
       - libqt5quick5
@@ -119,13 +106,43 @@ parts:
       - libqt5sql5-sqlite
       - libqt5svg5
       - libqt5xml5
-      - occt-misc
       - qml-module-qtquick-controls2
       - qml-module-qtquick-layouts
       - qml-module-qtquick2
       - qt5-image-formats-plugins
       - qttranslations5-l10n  # to get translations for Qt built-in strings
       - qtwayland5
+  # Using an OpenCascade version which is known to be working well with
+  # LibrePCB, not just the one from the Ubuntu repositories because many
+  # versions of OpenCascade do not work well.
+  opencascade:
+    plugin: cmake
+    cmake-generator: Ninja
+    cmake-parameters:
+      - "-DCMAKE_BUILD_TYPE=Release"
+      - "-DINSTALL_DIR=/usr"
+      - "-DBUILD_LIBRARY_TYPE=Shared"
+      - "-DBUILD_MODULE_ApplicationFramework=0"
+      - "-DBUILD_MODULE_DataExchange=1"
+      - "-DBUILD_MODULE_Draw=0"
+      - "-DBUILD_MODULE_FoundationClasses=0"
+      - "-DBUILD_MODULE_ModelingAlgorithms=0"
+      - "-DBUILD_MODULE_ModelingData=0"
+      - "-DBUILD_MODULE_Visualization=0"
+      - "-DUSE_DRACO=0"
+      - "-DUSE_FREEIMAGE=0"
+      - "-DUSE_FREETYPE=0"
+      - "-DUSE_GLES2=0"
+      - "-DUSE_OPENGL=0"
+      - "-DUSE_OPENVR=0"
+      - "-DUSE_RAPIDJSON=0"
+      - "-DUSE_TBB=0"
+      - "-DUSE_TK=0"
+      - "-DUSE_VTK=0"
+    source: https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_7_2.tar.gz
+    build-packages:
+      - build-essential
+      - ninja-build
   desktop-qt5:
     build-packages:
       - build-essential
