@@ -75,10 +75,6 @@ parts:
       # finding OpenCascade. We revert this by moving more important paths
       # to the front of PATH.
       - PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
-    # One more workaround to fix a CMake/OpenCascade error...
-    override-build: |
-      ln -s "/root/stage/usr/lib" "/root/stage/usr/lib\${OCCT_INSTALL_BIN_LETTER}"
-      snapcraftctl build
     source: https://github.com/LibrePCB/LibrePCB.git
     source-tag: 1.1.0
     build-packages:
@@ -140,6 +136,10 @@ parts:
       - "-DUSE_TK=0"
       - "-DUSE_VTK=0"
     source: https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_7_2.tar.gz
+    # Workaround to fix a CMake/OpenCascade error...
+    override-build: |
+      snapcraftctl build
+      sed -i 's:\\${OCCT_INSTALL_BIN_LETTER}::g' $SNAPCRAFT_PART_INSTALL/usr/lib/cmake/opencascade/OpenCASCADE*.cmake
     build-packages:
       - build-essential
       - ninja-build
