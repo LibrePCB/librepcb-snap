@@ -65,8 +65,12 @@ apps:
       - x11
 
 parts:
+  patches:
+    source: patches
+    plugin: dump
+    prime: [-*]
   librepcb:
-    after: [opencascade, desktop-qt5]
+    after: [patches, opencascade, desktop-qt5]
     plugin: cmake
     cmake-generator: Ninja
     cmake-parameters:
@@ -78,6 +82,10 @@ parts:
       - PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
     source: https://github.com/LibrePCB/LibrePCB.git
     source-tag: 1.1.0
+    override-build: |
+      git -C $CRAFT_PART_SRC checkout -- .
+      git -C $CRAFT_PART_SRC apply $CRAFT_STAGE/*.patch
+      craftctl default
     build-packages:
       - build-essential
       - libglu1-mesa-dev
