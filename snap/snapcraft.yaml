@@ -2,7 +2,7 @@ name: librepcb
 title: LibrePCB
 base: core22
 icon: snap/gui/librepcb.svg
-version: 1.1.0-2
+version: 1.2.0
 license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
@@ -81,10 +81,10 @@ parts:
       # to the front of PATH.
       - PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
     source: https://github.com/LibrePCB/LibrePCB.git
-    source-tag: 1.1.0
+    source-tag: 1.2.0
     override-build: |
       git -C $CRAFT_PART_SRC checkout -- .
-      git -C $CRAFT_PART_SRC apply $CRAFT_STAGE/*.patch
+      # git -C $CRAFT_PART_SRC apply $CRAFT_STAGE/*.patch
       craftctl default
     build-packages:
       - build-essential
