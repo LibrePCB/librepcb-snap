@@ -30,7 +30,9 @@ confinement: strict
 
 apps:
   librepcb:
-    command: bin/desktop-launch $SNAP/usr/local/bin/librepcb
+    command: usr/local/bin/librepcb
+    command-chain:
+      - bin/desktop-launch
     desktop: usr/local/share/applications/org.librepcb.LibrePCB.desktop
     environment:
       # Do not use Wayland for now because the 3D viewer contains very ugly
@@ -53,7 +55,9 @@ apps:
       - wayland
       - x11
   librepcb-cli:
-    command: bin/desktop-launch $SNAP/usr/local/bin/librepcb-cli
+    command: usr/local/bin/librepcb-cli
+    command-chain:
+      - bin/desktop-launch
     plugs:
       - desktop
       - desktop-legacy
@@ -81,34 +85,46 @@ parts:
     build-packages:
       - build-essential
       - libglu1-mesa-dev
-      - libqt5opengl5-dev
-      - libqt5svg5-dev
+      - libqt6core5compat6-dev
+      - libqt6opengl6-dev
+      - libqt6svg6-dev
       - libsfml-dev
       - ninja-build
       - openssl
-      - qtbase5-dev
-      - qtdeclarative5-dev
-      - qtquickcontrols2-5-dev
-      - qttools5-dev
-      - qttools5-dev-tools
+      - qt6-base-dev
+      - qt6-declarative-dev
+      - qt6-l10n-tools
+      - qt6-tools-dev
+      - qt6-tools-dev-tools
       - zlib1g
       - zlib1g-dev
+      - libxcb-xinerama0
+      - libx11-xcb-dev
+      - qt6-qpa-plugins
+      - qt6-xdgdesktopportal-platformtheme
     stage-packages:
+      - libglu1-mesa-dev
+      - libxcb-xinerama0
       - libglu1-mesa
-      - libqt5opengl5
-      - libqt5printsupport5
-      - libqt5quick5
-      - libqt5quickcontrols2-5
-      - libqt5sql5
-      - libqt5sql5-sqlite
-      - libqt5svg5
-      - libqt5xml5
+      - libqt6core5compat6
+      - libqt6opengl6
+      - libproxy1v5
+      - libqt6printsupport6
+      - libqt6quick6
+      - libqt6openglwidgets6
+      - libqt6quickcontrols2-6
+      - libqt6sql6
+      - libqt6sql6-sqlite
+      - libqt6svg6
+      - libqt6xml6
       - qml-module-qtquick-controls2
       - qml-module-qtquick-layouts
       - qml-module-qtquick2
-      - qt5-image-formats-plugins
-      - qttranslations5-l10n  # to get translations for Qt built-in strings
-      - qtwayland5
+      - qt6-image-formats-plugins
+      - qt6-translations-l10n  # to get translations for Qt built-in strings
+      - qt6-wayland
+      - qt6-qpa-plugins
+      - qt6-xdgdesktopportal-platformtheme
   # Using an OpenCascade version which is known to be working well with
   # LibrePCB, not just the one from the Ubuntu repositories because many
   # versions of OpenCascade do not work well.
@@ -145,26 +161,24 @@ parts:
       - build-essential
       - ninja-build
   desktop-qt5:
-    build-packages:
-      - build-essential
-      - qtbase5-dev
-      - dpkg-dev
+    source: snap/local/snapcraft-desktop-helpers
+    source-type: local
+    source-subdir: qt
+    plugin: make
     make-parameters:
       - FLAVOR=qt5
-    plugin: make
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: qt
+    build-environment:
+      - LD_LIBRARY_PATH: $CRAFT_STAGE/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR${LD_LIBRARY_PATH:+:$LD_LIBRARY_PATH}
+    build-packages:
+      - build-essential
+      - dpkg-dev
+      - gtk-update-icon-cache
+      - libglib2.0-bin
     stage-packages:
+      - libc-bin
+      - libgdk-pixbuf-2.0-0
+      - libnvidia-egl-wayland1
       - libxkbcommon0
-      - fonts-freefont-ttf
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-standard
-      - shared-mime-info
-      - libqt5gui5
-      - libgdk-pixbuf2.0-0
-      - libqt5svg5
       - locales-all
+      - shared-mime-info
       - xdg-user-dirs
-      - fcitx-frontend-qt5
