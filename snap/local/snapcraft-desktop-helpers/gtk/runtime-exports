@@ -1,0 +1,29 @@
+###########################
+# GNOME runtime selection #
+###########################
+
+if [ -d $SNAP/gnome-platform ]; then
+  RUNTIME=$SNAP/gnome-platform
+  if [ ! -d $RUNTIME/usr ]; then
+    platform_snap_name="$(
+        grep \
+            --extended-regexp \
+            'default-provider: *gnome-[[:digit:]]+-[[:digit:]]+-[[:digit:]]+' \
+            $SNAP/meta/snap.yaml \
+            | cut --delimiter=: --fields=2 \
+            | sed 's/^ *//' \
+            || true
+    )"
+
+    if test -n "${platform_snap_name}"; then
+        echo "You need to connect this snap to the gnome platform snap."
+        echo ""
+        echo "You can do this with those commands:"
+        echo "snap install ${platform_snap_name}"
+        echo "snap connect $SNAP_NAME:${platform_snap_name} ${platform_snap_name}"
+        echo ""
+        exit 1
+    fi
+  fi
+fi
+
