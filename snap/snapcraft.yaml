@@ -108,15 +108,15 @@ parts:
       - libglu1-mesa-dev
       - libproxy1v5
       - libqt6core5compat6
-      - libqt6opengl6
-      - libqt6openglwidgets6
-      - libqt6printsupport6
+      - libqt6opengl6t64
+      - libqt6openglwidgets6t64
+      - libqt6printsupport6t64
       - libqt6quick6
       - libqt6quickcontrols2-6
-      - libqt6sql6
+      - libqt6sql6t64
       - libqt6sql6-sqlite
       - libqt6svg6
-      - libqt6xml6
+      - libqt6xml6t64
       - libxcb-xinerama0
       - qml-module-qtquick-controls2
       - qml-module-qtquick-layouts
