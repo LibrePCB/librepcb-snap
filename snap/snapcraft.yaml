@@ -28,13 +28,6 @@ description: |
 grade: stable
 confinement: strict
 
-architectures:
-  - build-on: amd64
-  - build-on: arm64
-  - build-on: armhf
-  - build-on: s390x
-  - build-on: ppc64el
-
 # See https://github.com/ubuntu/snapcraft-desktop-helpers/pull/227#issuecomment-2694314156
 layout:
   /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:
