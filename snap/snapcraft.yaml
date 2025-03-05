@@ -1,8 +1,8 @@
 name: librepcb
 title: LibrePCB
-base: core22
+base: core24
 icon: snap/gui/librepcb.svg
-version: 1.2.0-2  # Always append a deployment version (e.g. "-1")
+version: 1.2.0-3  # Always append a deployment version (e.g. "-1")
 license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
@@ -28,11 +28,19 @@ description: |
 grade: stable
 confinement: strict
 
+# See https://github.com/ubuntu/snapcraft-desktop-helpers/pull/227#issuecomment-2694314156
+layout:
+  /usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:
+    bind: $SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy
+
 apps:
   librepcb:
     command: bin/desktop-launch $SNAP/usr/local/bin/librepcb
     desktop: usr/local/share/applications/org.librepcb.LibrePCB.desktop
     environment:
+      # Fix "error while loading shared libraries: libpxbackend-1.0.so".
+      # See https://github.com/ubuntu/snapcraft-desktop-helpers/pull/227#issuecomment-2694314156.
+      LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/libproxy:$SNAP/usr/lib/$CRAFT_ARCH_TRIPLET_BUILD_FOR/pulseaudio
       # Do not use Wayland for now because the 3D viewer contains very ugly
       # rendering artifacts. In addition, Wayland does not support
       # QWindow::requestActivate() which is used for switching windows.
