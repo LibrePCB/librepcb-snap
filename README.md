@@ -15,7 +15,7 @@ sudo snap install snapcraft --classic
 ### Build
 
 ```bash
-snapcraft --use-lxd
+snapcraft pack [--use-lxd]
 ```
 
 ### Install

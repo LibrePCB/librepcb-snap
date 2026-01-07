@@ -2,12 +2,13 @@ name: librepcb
 title: LibrePCB
 base: core24
 icon: snap/gui/librepcb.svg
-version: 1.3.0-1  # Always append a deployment version (e.g. "-1")
+version: 2.0.0-rc1-1  # Always append a deployment version (e.g. "-1")
 license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
 source-code: https://github.com/LibrePCB/LibrePCB
 issues: https://github.com/LibrePCB/LibrePCB/issues
+contact: https://librepcb.org/contact/
 summary: EDA software to develop printed circuit boards.
 description: |
   LibrePCB is a free EDA software to draw schematics and design printed
@@ -35,8 +36,8 @@ layout:
 
 apps:
   librepcb:
-    command: bin/desktop-launch $SNAP/usr/local/bin/librepcb
-    desktop: usr/local/share/applications/org.librepcb.LibrePCB.desktop
+    command: bin/desktop-launch $SNAP/usr/bin/librepcb
+    desktop: usr/share/applications/org.librepcb.LibrePCB.desktop
     environment:
       # Fix "error while loading shared libraries: libpxbackend-1.0.so".
       # See https://github.com/ubuntu/snapcraft-desktop-helpers/pull/227#issuecomment-2694314156.
@@ -61,7 +62,7 @@ apps:
       - wayland
       - x11
   librepcb-cli:
-    command: bin/desktop-launch $SNAP/usr/local/bin/librepcb-cli
+    command: bin/desktop-launch $SNAP/usr/bin/librepcb-cli
     plugs:
       - desktop
       - desktop-legacy
@@ -74,55 +75,44 @@ apps:
 
 parts:
   librepcb:
-    after: [opencascade, desktop-qt]
+    after: [opencascade, desktop-qt, rust-toolchain]
     plugin: cmake
     cmake-generator: Ninja
     cmake-parameters:
-      - "-DCMAKE_INSTALL_PREFIX=/usr/local"
-      - "-DQT_MAJOR_VERSION=6"
+      - "-DCMAKE_INSTALL_PREFIX=/usr"
     build-environment:
       # Snapcraft prefixes PATH with something that makes cmake to fail
       # finding OpenCascade. We revert this by moving more important paths
       # to the front of PATH.
       - PATH: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:$PATH"
     source: https://github.com/LibrePCB/LibrePCB.git
-    source-tag: 1.3.0
+    source-tag: 2.0.0-rc1
     build-packages:
       - build-essential
-      - cargo
       - libglu1-mesa-dev
-      - libqt6core5compat6-dev
       - libqt6opengl6-dev
       - libqt6svg6-dev
       - libsfml-dev
       - ninja-build
       - openssl
       - qt6-base-dev
-      - qt6-declarative-dev
       - qt6-l10n-tools
       - qt6-tools-dev
       - qt6-tools-dev-tools
-      - rustc
       - zlib1g
       - zlib1g-dev
     stage-packages:
       - libglu1-mesa
       - libglu1-mesa-dev
       - libproxy1v5
-      - libqt6core5compat6
       - libqt6opengl6t64
       - libqt6openglwidgets6t64
       - libqt6printsupport6t64
-      - libqt6quick6
-      - libqt6quickcontrols2-6
       - libqt6sql6t64
       - libqt6sql6-sqlite
       - libqt6svg6
       - libqt6xml6t64
       - libxcb-xinerama0
-      - qml-module-qtquick-controls2
-      - qml-module-qtquick-layouts
-      - qml-module-qtquick2
       - qt6-image-formats-plugins
       - qt6-qpa-plugins
       - qt6-translations-l10n  # to get translations for Qt built-in strings
@@ -155,7 +145,7 @@ parts:
       - "-DUSE_TBB=0"
       - "-DUSE_TK=0"
       - "-DUSE_VTK=0"
-    source: https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_7_2.tar.gz
+    source: https://github.com/Open-Cascade-SAS/OCCT/archive/refs/tags/V7_9_1.tar.gz
     # Workaround to fix a CMake/OpenCascade error...
     override-build: |
       snapcraftctl build
@@ -197,3 +187,10 @@ parts:
       - shared-mime-info
       - xdg-user-dirs
       - xkb-data
+  rust-toolchain:
+    plugin: nil
+    build-packages:
+      - curl
+    override-pull: >
+      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs |
+      sh -s -- -y --default-toolchain 1.92.0 --profile minimal
