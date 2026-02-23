@@ -2,7 +2,7 @@ name: librepcb
 title: LibrePCB
 base: core24
 icon: snap/gui/librepcb.svg
-version: 2.0.1-1  # Always append a deployment version (e.g. "-1")
+version: 2.0.1-2  # Always append a deployment version (e.g. "-1")
 license: GPL-3.0+
 website: https://librepcb.org
 donation: https://librepcb.org/donate/
