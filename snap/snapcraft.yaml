@@ -118,6 +118,7 @@ parts:
       - qt6-translations-l10n  # to get translations for Qt built-in strings
       - qt6-wayland
       - qt6-xdgdesktopportal-platformtheme
+      - ibus # needed to support ibus based input methods
   # Using an OpenCascade version which is known to be working well with
   # LibrePCB, not just the one from the Ubuntu repositories because many
   # versions of OpenCascade do not work well.
